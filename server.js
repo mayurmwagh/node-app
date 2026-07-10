@@ -72,7 +72,7 @@ app.get("/", (req, res) => {
                 </p>
 
                 <p>
-                    <strong>GitHub → Jenkins → Docker → Deployment → Live Application</strong>
+                    <strong>GitHub → Jenkins → Docker → Deployment → Live Application Testing</strong>
                 </p>
 
                 <div class="status">
