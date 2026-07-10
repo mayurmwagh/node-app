@@ -57,6 +57,23 @@ pipeline{
                 }
             }
         }
+        stage('Push Docker image'){
+            step {
+                withCredentials([
+                    usernamePassword(
+                        credentialsId: 'docker-hub',
+                        usernameVariable: 'DOCKER_USER',
+                        passwordVariable: 'DOCKER_PASS'
+                    )
+                ])
+                sh '''
+                    docker tag ${DOCKER_REPO}:${BUILD_NUMBER} \
+                    ${DOCKER_REPO}/${IMAGE_NAME}:${BUILD_NUMBER}
+
+                    Docker push ${DOCKER_REPO}/${IMAGE_NAME}:${BUILD_NUMBER}
+                '''
+            }
+        }
     }
 }
 
