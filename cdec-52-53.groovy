@@ -73,6 +73,7 @@ pipeline{
                     Docker push ${DOCKER_REPO}/${IMAGE_NAME}:${BUILD_NUMBER}
                 '''
             }
+            }
         }
     }
 }
