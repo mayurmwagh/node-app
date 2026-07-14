@@ -1,7 +1,5 @@
 pipeline{
-    agent {
-        label 'Node-Agent'
-    }
+    agent any
     environment {
         DOCKER_REPO = "mayurwagh"
         DOCKER_USER = "node-app"
