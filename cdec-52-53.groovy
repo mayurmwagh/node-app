@@ -79,15 +79,20 @@ pipeline{
                     }
                 }
             }
-            stage('Deploy Container'){
-                steps {
-                        sh '''
-                            docker rm -f ${CONTAINER_NAME} || true
+            // stage('Deploy Container'){
+            //     steps {
+            //             sh '''
+            //                 docker rm -f ${CONTAINER_NAME} || true
 
-                            docker run -d \
-                            --name ${CONTAINER_NAME} -p 3000:3000 \
-                            ${DOCKER_REPO}/${DOCKER_USER}:${BUILD_NUMBER} 
-                        '''
+            //                 docker run -d \
+            //                 --name ${CONTAINER_NAME} -p 3000:3000 \
+            //                 ${DOCKER_REPO}/${DOCKER_USER}:${BUILD_NUMBER} 
+            //             '''
+            //     }
+            // }
+            stage('K8s-Deployment'){
+                steps {
+                    sh 'kubectl apply -f deployment.yaml'
                 }
             }
         }
