@@ -80,6 +80,9 @@ pipeline{
             stage('K8s-Deployment'){
                 steps {
           
+                    sh '''
+                     sed -i "s|mayurwagh/node-app:latest|${DOCKER_REPO}/${DOCKER_USER}:${BUILD_NUMBER}|g" k8s/deployment.yaml
+                    '''
                     sh 'cat k8s/deployment.yaml'
                 }
             }
