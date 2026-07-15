@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: image: mayurwagh/node-app:latest
+        image: mayurwagh/node-app:latest
         ports:
         - containerPort: 80
       
