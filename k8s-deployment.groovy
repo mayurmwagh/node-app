@@ -95,7 +95,7 @@ pipeline{
 
                     withCredentials([
                         [$class: 'AmazonWebServicesCredentialsBinding',
-                        credentialsId: 'aws-creds']
+                        credentialsId: 'aws_creds']
                     ]) {
 
                         sh """
