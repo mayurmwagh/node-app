@@ -118,22 +118,22 @@ pipeline{
             //         '''
             //     }
             // }
-            stage('Verify Deployment') {
-                steps {
+        //     stage('Verify Deployment') {
+        //         steps {
 
-                    sh '''
-                    kubectl get nodes
+        //             sh '''
+        //             kubectl get nodes
 
-                    kubectl get deployments
+        //             kubectl get deployments
 
-                    kubectl get pods
+        //             kubectl get pods
 
-                    kubectl get svc
+        //             kubectl get svc
 
-                    kubectl rollout status deployment/node-app
-                    '''
-                }
-           }
+        //             kubectl rollout status deployment/node-app
+        //             '''
+        //         }
+        //    }
     }
            post {
 

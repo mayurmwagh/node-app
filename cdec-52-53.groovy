@@ -77,20 +77,14 @@ pipeline{
                     }
                 }
             }
-            // stage('Deploy Container'){
-            //     steps {
-            //             sh '''
-            //                 docker rm -f ${CONTAINER_NAME} || true
-
-            //                 docker run -d \
-            //                 --name ${CONTAINER_NAME} -p 3000:3000 \
-            //                 ${DOCKER_REPO}/${DOCKER_USER}:${BUILD_NUMBER} 
-            //             '''
-            //     }
-            // }
             stage('K8s-Deployment'){
                 steps {
-                    sh 'kubectl apply -f deployment.yaml'
+
+                    sh '''
+                    sed -i 's|image: .*|image: ${IMAGE_NAME}:${BUILD_NUMBER} |' k8s/deployment.yaml 
+
+                    '''
+                    sh 'cat k8s/deployment.yaml'
                 }
             }
         }
