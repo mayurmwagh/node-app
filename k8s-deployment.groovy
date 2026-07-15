@@ -102,19 +102,22 @@ pipeline{
                         aws eks update-kubeconfig \
                         --region ${AWS_REGION} \
                         --name ${CLUSTER_NAME}
+
+                        kubectl apply -f k8s/*
+
                         """
                     }
                 }
             }
-            stage('Deploy to EKS') {
-                steps {
+            // stage('Deploy to EKS') {
+            //     steps {
 
-                    sh '''
-                    kubectl apply -f k8s/*
+            //         sh '''
+            //         kubectl apply -f k8s/*
                 
-                    '''
-                }
-            }
+            //         '''
+            //     }
+            // }
             stage('Verify Deployment') {
                 steps {
 
