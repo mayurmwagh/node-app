@@ -89,11 +89,7 @@ pipeline{
                     sh "cat k8s/deployment.yaml"
                 }
             }
-            stage('K8s-Deployment'){
-                steps {
-                    sh 'kubectl apply -f deployment.yaml'
-                }
-            }
+
             stage('Configure EKS') {
                 steps {
 
