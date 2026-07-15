@@ -135,6 +135,7 @@ pipeline{
                     '''
                 }
            }
+    }
            post {
 
                 success {
@@ -149,7 +150,7 @@ pipeline{
                     cleanWs()
                 }
             }
-        }
+        
     }
 
 
