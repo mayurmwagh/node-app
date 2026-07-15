@@ -81,7 +81,8 @@ pipeline{
                 steps {
 
                     sh '''
-                    sed -i 's|image: .*|image: ${IMAGE_NAME}:${BUILD_NUMBER} |' k8s/deployment.yaml 
+                        
+                        sed -i 's|mayurwagh/node-app:latest|://${DOCKER_REPO}/${DOCKER_USER}:${BUILD_NUMBER}|g'
 
                     '''
                     sh 'cat k8s/deployment.yaml'
