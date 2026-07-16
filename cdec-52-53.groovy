@@ -77,13 +77,22 @@ pipeline{
                     }
                 }
             }
-            stage('K8s-Deployment'){
+            stage('Image-Name-change'){
                 steps {
           
                     sh '''
                      sed -i "s|mayurwagh/node-app:latest|${DOCKER_REPO}/${DOCKER_USER}:${BUILD_NUMBER}|g" k8s/deployment.yaml
                     '''
                     sh 'cat k8s/deployment.yaml'
+                }
+            }
+            stage('Deploy to cluster'){
+                steps{
+                    withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'aws_creds', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
+                         sh '''
+                            aws s3 ls
+                         '''
+                    }
                 }
             }
         }
