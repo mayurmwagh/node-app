@@ -95,7 +95,8 @@ pipeline{
                             aws eks update-kubeconfig --name ${CLUSTER_NAME} --region ${REGION}
                             
                             kubectl get nodes
-                            kubectl apply -f k8s/*
+                            kubectl apply -f k8s/deployment.yaml
+                            kubectl apply -f k8s/service.yaml
                             kubectl get pods 
                             kubectl get deployment
                             kubectl get svc 
