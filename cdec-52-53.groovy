@@ -5,6 +5,8 @@ pipeline{
         DOCKER_USER = "node-app"
         IMAGE_NAME = "node-app"
         CONTAINER_NAME = "node-container"
+        CLUSTER_NAME = "demo-mayurekscluster1"
+        REGION = "eu-north-1"
     }
     stages {
         stage('Checkout') {
@@ -90,12 +92,33 @@ pipeline{
                 steps{
                     withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'aws_creds', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
                          sh '''
-                            aws s3 ls
+                            aws eks update-kubeconfig --name ${CLUSTER_NAME} --region ${REGION}
+                            
+                            kubectl get nodes
+                            kubectl apply -f k8s/*
+                            kubectl get pods 
+                            kubectl get deployment
+                            kubectl get svc 
                          '''
                     }
                 }
             }
         }
+        post {
+
+                success {
+                    echo "Application deployed successfully to Amazon EKS."
+                }
+
+                failure {
+                    echo "Pipeline failed. Please check the logs."
+                }
+
+                always {
+                    cleanWs()
+                }
+            }
+
     }
 
 
